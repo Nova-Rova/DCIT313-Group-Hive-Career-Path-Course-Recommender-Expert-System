@@ -15,26 +15,16 @@ import os
 import sys
 from pyswip import Prolog
 
-# ──────────────────────────────────────────────────────────────
-# CONFIGURATION
-# ──────────────────────────────────────────────────────────────
 
-# Path to the Prolog knowledge base (relative to this script)
 KB_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "..", "knowledge_base", "career_rules.pl"
 )
 
-# How many top careers to display
 TOP_N = 3
 
-# Minimum score threshold (must match >= 2 conditions)
 MIN_SCORE = 2
 
-
-# ──────────────────────────────────────────────────────────────
-# COLOUR HELPERS  (works on Mac/Linux terminals)
-# ──────────────────────────────────────────────────────────────
 
 class C:
     RESET  = "\033[0m"
@@ -55,11 +45,6 @@ def yellow(s): return f"{C.YELLOW}{s}{C.RESET}"
 def red(s):    return f"{C.RED}{s}{C.RESET}"
 def dim(s):    return f"{C.DIM}{s}{C.RESET}"
 
-
-# ──────────────────────────────────────────────────────────────
-# PROLOG ENGINE
-# ──────────────────────────────────────────────────────────────
-
 def load_prolog() -> Prolog:
     """Load the Prolog knowledge base via pyswip."""
     prolog = Prolog()
@@ -67,7 +52,6 @@ def load_prolog() -> Prolog:
     if not os.path.exists(kb_path):
         print(red(f"[ERROR] Knowledge base not found at: {kb_path}"))
         sys.exit(1)
-    # Use forward slashes for Prolog on all platforms
     prolog_path = kb_path.replace("\\", "/")
     prolog.consult(prolog_path)
     return prolog
@@ -103,12 +87,10 @@ def run_inference(prolog: Prolog, profile: dict) -> list:
     if not facts:
         return []
 
-    # Build the Prolog list string: [interest(technology), skill(problem_solving), ...]
     fact_list_str = "[" + ", ".join(facts) + "]"
 
     results = []
 
-    # Query 1: get all matching careers and their scores
     query = f"get_recommendation({fact_list_str}, CareerID, Score)"
     matches = list(prolog.query(query))
 
@@ -116,7 +98,6 @@ def run_inference(prolog: Prolog, profile: dict) -> list:
         career_id = str(match["CareerID"])
         score     = int(match["Score"])
 
-        # Query 2: get full career details + explanation
         detail_query = (
             f"get_career_info({career_id}, Name, Desc, Degree, Certs, Outlook, Why)"
         )
@@ -125,13 +106,11 @@ def run_inference(prolog: Prolog, profile: dict) -> list:
             continue
         d = details[0]
 
-        # Query 3: get rule size for match percentage
         size_query = f"get_rule_size({career_id}, Size)"
         sizes = list(prolog.query(size_query))
         rule_size  = int(sizes[0]["Size"]) if sizes else 1
         match_pct  = round((score / rule_size) * 100)
 
-        # Parse certifications list from Prolog
         raw_certs = d["Certs"]
         if isinstance(raw_certs, list):
             certs = [str(c) for c in raw_certs]
@@ -151,19 +130,13 @@ def run_inference(prolog: Prolog, profile: dict) -> list:
             "match_pct":   match_pct,
         })
 
-    # Sort: primary = score DESC, secondary = match_pct DESC, tertiary = name ASC
     results.sort(key=lambda r: (-r["score"], -r["match_pct"], r["name"]))
 
-    # Assign ranks
     for i, r in enumerate(results[:TOP_N]):
         r["rank"] = i + 1
 
     return results[:TOP_N]
 
-
-# ──────────────────────────────────────────────────────────────
-# USER INTERFACE
-# ──────────────────────────────────────────────────────────────
 
 OPTIONS = {
     "interests": {
@@ -311,7 +284,7 @@ def print_results(results: list):
     print(bold(green(f"  ✔  Top {len(results)} Career Recommendation(s) for You\n")))
 
     for r in results:
-        bar_filled = int(r["match_pct"] / 5)  # scale to 20 chars
+        bar_filled = int(r["match_pct"] / 5)  
         bar = "█" * bar_filled + "░" * (20 - bar_filled)
 
         print(blue("  ╔══════════════════════════════════════════════════════════╗"))
@@ -325,7 +298,6 @@ def print_results(results: list):
         print(blue("  ║") + f"  {cyan('Outlook')}     {r['outlook']}")
         print(blue("  ╠══════════════════════════════════════════════════════════╣"))
         print(blue("  ║") + f"  {bold('💡 Why this career?')}")
-        # Word-wrap the explanation to ~55 chars
         why = r["why"]
         words = why.split()
         line = "  ║     "
@@ -376,9 +348,6 @@ def export_report(profile: dict, results: list):
     print(dim(f"\n  Report saved to: {os.path.normpath(path)}"))
 
 
-# ──────────────────────────────────────────────────────────────
-# MAIN LOOP
-# ──────────────────────────────────────────────────────────────
 
 def main():
     print_banner()
@@ -415,12 +384,10 @@ def main():
 
         print_results(results)
 
-        # Ask to export
         save = input(cyan("  Save report to file? (y/n): ")).strip().lower()
         if save == "y":
             export_report(profile, results)
 
-        # Ask to restart
         again = input(cyan("\n  Start over? (y/n): ")).strip().lower()
         if again != "y":
             print(bold(green("\n  Thank you for using the Career Recommender. Good luck! 🎓\n")))
