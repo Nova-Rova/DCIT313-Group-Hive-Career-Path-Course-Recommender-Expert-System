@@ -1,4 +1,4 @@
-# DCIT313-Group[Name]-CareerRecommender
+# DCIT313-Group-Hive-CareerPath-course-Recomender-Expert-System
 
 ## Career Path & Course Recommender Expert System
 
