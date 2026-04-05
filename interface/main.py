@@ -10,7 +10,38 @@ Architecture:
                                             ← Inference Results
                 ← Ranked Career Recommendations + Explanations
 """
+"""
+main.py – User Interface & Inference Controller
 
+This script serves as the main entry point of the Career Path & Course
+Recommender Expert System. It provides a command-line interface that
+collects user input, communicates with the Prolog knowledge base, and
+displays ranked career recommendations.
+
+Core Responsibilities:
+- Loads and connects to the Prolog knowledge base using pyswip
+- Collects user profile data (interests, subjects, skills, environment, education)
+- Translates user input into Prolog facts
+- Executes forward-chaining inference queries in Prolog
+- Retrieves and processes matching career rules with scores
+- Ranks and formats the top career recommendations
+- Displays detailed explanations for each recommendation
+- Optionally exports results to a report file
+
+System Flow:
+    User Input → Python Interface (main.py) → pyswip → Prolog Engine
+                                                     → Rule Matching & Scoring
+                ← Processed Results ← Ranked Career Recommendations
+
+Key Features:
+- Rule-based reasoning (symbolic AI, not machine learning)
+- Match scoring and percentage calculation
+- Structured and user-friendly CLI output
+- Report generation for documentation
+
+This file acts as the bridge between the user and the expert system,
+handling both interaction and coordination of the inference process.
+"""
 import os
 import sys
 from pyswip import Prolog
