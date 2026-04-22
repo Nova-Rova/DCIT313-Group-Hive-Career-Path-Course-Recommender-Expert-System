@@ -14,7 +14,7 @@
 | Joel Asante                   | Asante-jpg       | 22238914   | Documentation & Knowledge Engineering |
 | Muhammad Amanullah            | Heisamanullah    | 22017780   | Testing & Validation                  |
 | Amartey Felix Nii Laryea      | Nova-Rova        | 22107810   | Knowledge Base Design                 |
-| Benjamin Ato Davis            | —                | 22046566   | Python Interface                      |
+| Benjamin Ato Davis            | alakazem         | 22046566   | Python Interface                      |
 | Glago Gideon Elorm            | —                | 22128981   | Programmer                            |
 ---
 
