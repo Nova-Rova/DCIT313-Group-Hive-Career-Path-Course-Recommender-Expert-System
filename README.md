@@ -15,7 +15,7 @@
 | Muhammad Amanullah            | Heisamanullah    | 22017780   | Testing & Validation                  |
 | Amartey Felix Nii Laryea      | Nova-Rova        | 22107810   | Knowledge Base Design                 |
 | Benjamin Ato Davis            | alakazem         | 22046566   | Python Interface                      |
-| Glago Gideon Elorm            | —                | 22128981   | Programmer                            |
+| Glago Gideon Elorm            | glaogideonelorm  | 22128981   | Programmer                            |
 ---
 
 ## System Description
