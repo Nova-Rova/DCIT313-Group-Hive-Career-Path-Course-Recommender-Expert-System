@@ -7,17 +7,15 @@
 ---
 
 ## Group Members
-
-| Name                     | Student ID | Role                                  |
-| ------------------------ | ---------- | ------------------------------------- |
-| James Preprah Ankrah     | 22037210   | Knowledge Base Design (Prolog Rules)  |
-| George Antwi             | 22014943   | Python Interface & pyswip Integration |
-| Joel Asante              | 22238914   | Documentation & Knowledge Engineering |
-| Muhammad Amanullah       | 22017780   | Testing & Validation                  |
-| Amartey Felix Nii Laryea | 22107810   | Knowledge Base Design                 |
-| Benjamin Ato Davis       | 22046566   | Python Interface                      |
-| Glago Gideon Elorm.      | 22128981   | Programmer                            |
-
+| Name                          | GitHub Username  | Student ID | Role                                  |
+|-------------------------------|------------------|------------|---------------------------------------|
+| James Preprah Ankrah          | Ankila-coder     | 22037210   | Knowledge Base Design (Prolog Rules)  |
+| George Antwi                  | gkantwi001       | 22014943   | Python Interface & pyswip Integration |
+| Joel Asante                   | Asante-jpg       | 22238914   | Documentation & Knowledge Engineering |
+| Muhammad Amanullah            | Heisamanullah    | 22017780   | Testing & Validation                  |
+| Amartey Felix Nii Laryea      | Nova-Rova        | 22107810   | Knowledge Base Design                 |
+| Benjamin Ato Davis            | —                | 22046566   | Python Interface                      |
+| Glago Gideon Elorm            | —                | 22128981   | Programmer                            |
 ---
 
 ## System Description
